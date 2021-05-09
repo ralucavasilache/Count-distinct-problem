@@ -1,0 +1,103 @@
+NUME: Vasilache Raluca
+GRUPA: 314 CA
+
+
+			Tema #2: Count-distinct problem
+
+
+Obiective :
+
+
+- lucrul cu Dictionare
+- familiarizarea cu rezolvarea unei probleme reale
+prin structuri de date din ce in ce mai eficiente
+
+
+Proiectul contine :
+
+- 3 fisiere sursa corespunzatoare celor 3 task-uri: freq.c, hash.c, hll.c
+- Un fisier Makefile
+- Un fisier README
+
+Implementare :
+
+	TASK 1 - Vector de frecventa
+
+	Cat timp se citeste un numar x, in vectorul de frecventa freq_arr
+creste cu o unitate valoarea de pe pozitia x.
+
+
+	TASK 2 - Hashtable cu open addressing
+
+	Pentru implementare hashtable-ului se foloseste un array de structuri, 
+o structura fiid alcatuita din doua campuri : key - sting-ul introdus si value - frecventa. 
+	Functia create_ht creeaza si returneaza hashtable-ul, alocand memorie pentru size
+structuri ca cele de mai sus.
+	Functia init_ht initializeaza campurile din hashtable altfel :
+		- toate values vor fi 0 si toate key vor fi "\0" pentru ca hashtable-ul
+este gol.
+	Pentru aflarea dimensiunii (size) hashtable-ului, se va parcurge fisierul de doua
+ori, o data pentru contorizarea numarului de intrari, si o data pentru citirea datelor.
+	Pentru fiecare elment x citit se apeleaza functia insert_ht care trece key-ul
+(string-ul citit) printr-o functie de hash care returneaza un numar(index) < size ce reprezinta
+pozitia din array la care se efectueaza urmatoarele operatii : 
+	- daca values = 0,  inseamna ca string-ul nu a mai fost citit : values devine 1,
+iar key devine x;
+	- daca key = x, inseamna ca string-ul a mai fost citit : values se mareste
+	- daca valus != 0 si key != x, inseamna ca s-a produs o coliziune. In acest caz 
+trebuie ca x sa fie adaugat pe prima pozitie libera > index. Daca nu exista se cauta 
+prima pozitie libera < index. Inainte de adaugarea lui x in hashtable, trebuie verificat
+daca el nu a fost deja adaugat la o citire anterioare. Se parcurg toate campurile din
+hashtable si se verifica pentru fiecare daca key == x, iar in caz afirmativ values++. 
+In timpul parcurgerii se memoreaza si prima pozitie disponibila(pos), iar daca x nu a fost 
+gasit in hashtable, se adauga pe pozitia pos.
+	Se elibereaza memoria alocata pentru hashtable.
+
+
+	TASK 3 - Estimatori probabilistici
+
+	Se urmeaza pasii indicati in enuntul temei: 
+	- se aloca memorie pentru un vector M de 2^11 elemente;
+	- fiecare numar citit de la tastatura se trece printr- o functie
+de hash. Numarul obtinut are urmatoare semnificatie : 
+	-primii 11 biti semnifica pozitia din vectorul M, ei se obtin ptrin-o shiftare
+la dreapta cu 21 de pozitii ( notat cu j ); 
+	- din urmatorii 21 biti trebuie numarat cati de 0 apar la inceputul secventei : 
+verificarea incepe de la finalul celor 21 de biti : daca nr%2 == 0, inseamna ca
+numarul este par si ultimul bit e 0 ( zeros++ ), altfel bitul e 1 si numarul de biti
+zeros se reseteaza ( zeros = 0 ); pentru verificarea tuturor bitilor se fac shiftari
+la dreapta cu cate o pozitie.
+	- M[j] = maxim (M[j], zeros)
+	- dupa completarea vectorului M, se calculeaza suma Z cu un for dupa formula din enunt,
+cu ajutorul unei functii z_calc care returneaza numarul Z de tip double
+	- se calculeaza alfa dupa formula din enunt
+	- se calculeaza E dupa formula din enunt 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
